@@ -136,7 +136,7 @@ mod lib {
     ///
     /// # Returns:
     ///
-    /// The maximum distance between two numbers of the array
+    /// The missing value from the array.
     pub fn get_missing_number(array: &[u32]) -> u32 {
 
         /* add one in order to get the expected size */
@@ -147,6 +147,46 @@ mod lib {
         let current_sum: u32 = array.iter().sum(); // O(n) time
 
         expected_sum - current_sum
+    }
+
+    /// Update array by calculating products of all items except the current one, takes O(n) time and O(n) space
+    ///
+    /// # Args:
+    ///
+    /// `array` - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// updated vector
+    pub fn product_all_items_except_current(array: &[u32]) -> Vec<u32> {
+
+        let mut result = vec![1; array.len()];
+        let mut product = 1;
+
+        for (index, value) in result.iter_mut().enumerate() {
+
+            if index == 0 {
+                continue;
+            }
+
+            product *= array[index - 1];
+            *value = product;
+        }
+
+        let mut index = array.len() - 1;
+        product = 1;
+        for (cursor, value) in result.iter_mut().rev().enumerate() {
+
+            if cursor == 0 {
+                continue;
+            }
+
+            product *= array[index];
+            *value *= product;
+            index -= 1;
+        }
+
+        result
     }
 }
 
@@ -164,3 +204,6 @@ mod tests_get_consecutive_max_range;
 
 #[cfg(test)]
 mod tests_get_missing_number;
+
+#[cfg(test)]
+mod tests_product_all_items_except_current;
