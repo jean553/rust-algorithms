@@ -19,16 +19,16 @@ mod tests {
     }
 
     #[test]
-    fn test_min_with_u16() {
+    fn test_min_with_i8() {
 
-        let array: [u16; 6] = [
-            60000,
-            32546,
-            10000,
-            65535,
-            222,
-            8909,
+        let array: [i8; 6] = [
+            -56,
+            67,
+            32,
+            109,
+            -67,
+            98,
         ];
-        assert_eq!(min(&array), 222);
+        assert_eq!(min(&array), -67);
     }
 }
