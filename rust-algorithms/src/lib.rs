@@ -127,6 +127,27 @@ mod lib {
 
         distance
     }
+
+    /// Find the missing number into an array of consecutive numbers in O(n) time and O(1) space
+    ///
+    /// # Args:
+    ///
+    /// array - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// The maximum distance between two numbers of the array
+    pub fn get_missing_number(array: &[u32]) -> u32 {
+
+        /* add one in order to get the expected size */
+        let array_size = (array.len() + 1) as u32;
+
+        /* n(n+1)/2 = (n^2+n)/2 */
+        let expected_sum = (array_size.pow(2) + array_size) / 2;
+        let current_sum: u32 = array.iter().sum();
+
+        expected_sum - current_sum
+    }
 }
 
 #[cfg(test)]
@@ -140,3 +161,6 @@ mod tests_get_max_range;
 
 #[cfg(test)]
 mod tests_get_consecutive_max_range;
+
+#[cfg(test)]
+mod tests_get_missing_number;
