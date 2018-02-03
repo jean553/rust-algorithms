@@ -66,3 +66,13 @@ Returns the missing value from an array of consecutives value, O(n) time and O(1
 let array: [u32; 4] = [4, 2, 1, 5];
 let missing_value = get_missing_value(&array); // 3
 ```
+
+### product_all_items_except_current(array)
+
+Returns the product of all the array items except the current item, O(n) time and O(n) space.
+An array of identical space is built. The original array is browsed twice.
+
+```rust
+let array: [u32; 4] = [2, 5, 3, 4];
+let result = product_all_items_except_current(&array); // [60, 24, 40, 30]
+```
