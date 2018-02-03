@@ -99,7 +99,7 @@ mod lib {
         let mut minimum = array[0];
         let mut maximum = array[1];
 
-        let mut distance = maximum - minimum;
+        let mut highest_distance = maximum - minimum;
 
         for current in array.iter() {
 
@@ -113,19 +113,20 @@ mod lib {
                 *current,
             );
 
-            let updated_distance = max(
-                distance,
-                (maximum - minimum).abs(),
-            );
-
-            if updated_distance != distance {
-                distance = updated_distance;
+            /* if an higher distance than before has been found,
+               set it as the highest one and reset the minimum
+               and maximum value at the current iterated item
+               (previous iterations do not matter anymore
+               as a new highest distance has been found) */
+            let current_distance = (maximum - minimum).abs();
+            if current_distance > highest_distance {
+                highest_distance = current_distance;
                 minimum = *current;
                 maximum = *current;
             }
         }
 
-        distance
+        highest_distance
     }
 
     /// Find the missing number into an array of consecutive numbers in O(n) time and O(1) space
@@ -139,8 +140,16 @@ mod lib {
     /// The missing value from the array.
     pub fn get_missing_number(array: &[u32]) -> u32 {
 
+        /* calculate the expected array size: current size + 1
+           because there is one missing item into the array */
+
         /* add one in order to get the expected size */
         let array_size = (array.len() + 1) as u32;
+
+        /* calculate the current sum (O(n)) and the expected sum
+           based on the formula n + (n-1) + (n-2) + ... + 1;
+           calculate the difference between the two sums:
+           this is the expected missing value */
 
         /* n(n+1)/2 = (n^2+n)/2 */
         let expected_sum = (array_size.pow(2) + array_size) / 2;
@@ -159,6 +168,10 @@ mod lib {
     ///
     /// updated vector
     pub fn product_all_items_except_current(array: &[u32]) -> Vec<u32> {
+
+        /* browse the array in both directions; during each browsing process,
+           multiply the current iterated item by the product of all the items
+           iterated before; the product is accumulated and reset between each iteration */
 
         let mut result = vec![1; array.len()];
         let mut product = 1;
@@ -199,6 +212,16 @@ mod lib {
     ///
     /// maximum product of three numbers that can be found into the array
     pub fn get_max_product_of_three(array: &[i32]) -> i32 {
+
+        /* browse the array once, keep track of the maximum product
+           got with three items (starting with the three first items);
+           keep also track of the product of two numbers (starting with the two first ones),
+           keep track of the maximum product of these two numbers;
+           at each iteration, check if the product of three numbers can be increased
+           with the iterated value and also check if the product of two numbers can be increased
+           with the iterated value; this second two numbers product is generated at each iteration
+           if a higher product of two numbers can be found;
+           there is also a product of two lowest numbers, in case of negative numbers */
 
         let mut highest = max(
             array[0],
