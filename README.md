@@ -76,3 +76,12 @@ An array of identical space is built. The original array is browsed twice.
 let array: [u32; 4] = [2, 5, 3, 4];
 let result = product_all_items_except_current(&array); // [60, 24, 40, 30]
 ```
+
+### get_max_product_of_three(array)
+
+Returns the maximum product of three numbers from an array, taking O(n) time and O(1) space.
+
+```rust
+let array: [i32; 5] = [-4, 3, -2, -5, 6];
+assert_eq!(get_max_product_of_three(&array), 120); // -5 * -4 * 6
+```

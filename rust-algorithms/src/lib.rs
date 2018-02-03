@@ -188,6 +188,64 @@ mod lib {
 
         result
     }
+
+    /// Returns the maximum product of three numbers from array, taking O(n) time and O(1) space.
+    ///
+    /// # Args:
+    ///
+    /// `array` - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// maximum product of three numbers that can be found into the array
+    pub fn get_max_product_of_three(array: &[i32]) -> i32 {
+
+        let mut highest = max(
+            array[0],
+            array[1],
+        );
+        let mut lowest = min(
+            array[0],
+            array[1],
+        );
+
+        let mut product_of_two = array[0] * array[1];
+        let mut product_of_two_lowest = product_of_two;
+        let mut product_of_three = product_of_two * array[2];
+
+        for current in array.iter().skip(2) {
+
+            product_of_three = max(
+                max(
+                    product_of_three,
+                    product_of_two * *current,
+                ),
+                product_of_two_lowest * *current,
+            );
+
+            product_of_two = max(
+                product_of_two,
+                highest * *current,
+            );
+
+            product_of_two_lowest = max(
+                product_of_two_lowest,
+                lowest * *current,
+            );
+
+            highest = max(
+                *current,
+                highest,
+            );
+
+            lowest = min(
+                *current,
+                lowest,
+            );
+        }
+
+        product_of_three
+    }
 }
 
 #[cfg(test)]
@@ -207,3 +265,6 @@ mod tests_get_missing_number;
 
 #[cfg(test)]
 mod tests_product_all_items_except_current;
+
+#[cfg(test)]
+mod tests_get_max_product_of_three;
