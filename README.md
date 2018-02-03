@@ -83,5 +83,23 @@ Returns the maximum product of three numbers from an array, taking O(n) time and
 
 ```rust
 let array: [i32; 5] = [-4, 3, -2, -5, 6];
-assert_eq!(get_max_product_of_three(&array), 120); // -5 * -4 * 6
+let max = get_max_product_of_three(&array); // -5 * -4 * 6 = 120
+```
+
+### get_merge_ranges(array)
+
+Merge array of ranges, taking O(n log n) time worst case (O(n) best case) and O(n) space.
+The array is sorted before processing, so it explains the time complexity.
+A resulting array is created from the first one, it explains the space complexity.
+
+```rust
+let ranges: [(i32, i32); 5] = [
+    (4, 7),
+    (3, 5),
+    (8, 10),
+    (2, 3),
+    (-6, -3),
+];
+
+let result = get_merge_ranges(&ranges); // [(-6, -3), (2, 7), (8, 10)]
 ```
