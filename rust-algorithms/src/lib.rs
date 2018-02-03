@@ -144,7 +144,7 @@ mod lib {
 
         /* n(n+1)/2 = (n^2+n)/2 */
         let expected_sum = (array_size.pow(2) + array_size) / 2;
-        let current_sum: u32 = array.iter().sum();
+        let current_sum: u32 = array.iter().sum(); // O(n) time
 
         expected_sum - current_sum
     }
