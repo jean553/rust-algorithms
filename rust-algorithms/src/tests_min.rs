@@ -31,4 +31,18 @@ mod tests {
         ];
         assert_eq!(min(&array), -67);
     }
+
+    #[test]
+    fn test_min_with_f32() {
+
+        let array: [f32; 6] = [
+            -56.56,
+            67.32,
+            32.99,
+            109.12,
+            -67.78,
+            98.43,
+        ];
+        assert_approx_eq!(min(&array), -67.78);
+    }
 }
