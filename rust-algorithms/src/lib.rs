@@ -1,3 +1,4 @@
+#[macro_use(assert_approx_eq)] extern crate assert_approx_eq;
 #[allow(dead_code)]
 
 mod lib {
