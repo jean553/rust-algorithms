@@ -32,11 +32,11 @@ cargo rustdoc -- --no-defaults
 
 ## Implemented methods
 
-### min(array)
+### min_value(array)
 
 Returns the minimum value from an array, O(n) time and O(1) space.
 
-### max(array)
+### max_value(array)
 
 Returns the maximum value from an array, O(n) time and O(1) space.
 

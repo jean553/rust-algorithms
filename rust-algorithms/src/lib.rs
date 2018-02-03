@@ -3,6 +3,11 @@
 
 mod lib {
 
+    use std::cmp::{
+        min,
+        max,
+    };
+
     /// Finds the minimum value of an array in O(n) time and O(1) space
     ///
     /// # Args:
@@ -12,7 +17,7 @@ mod lib {
     /// # Returns:
     ///
     /// the minimum value from the array
-    pub fn min<T>(array: &[T]) -> T
+    pub fn min_value<T>(array: &[T]) -> T
         where T: PartialOrd + Copy
     {
 
@@ -36,7 +41,7 @@ mod lib {
     /// # Returns:
     ///
     /// the maximum value from the array
-    pub fn max<T>(array: &[T]) -> T
+    pub fn max_value<T>(array: &[T]) -> T
         where T: PartialOrd + Copy
     {
         let mut maximum = array[0];
@@ -61,24 +66,19 @@ mod lib {
     /// The maximum distance between two numbers of the array
     pub fn get_max_range(array: &[i32]) -> i32
     {
-        use std::cmp::{
-            min,
-            max,
-        };
-
         let mut minimum = array[0];
         let mut maximum = array[1];
 
-        for index in 0..array.len() {
+        for current in array.iter() {
 
             minimum = min(
                 minimum,
-                array[index],
+                *current,
             );
 
             maximum = max(
                 maximum,
-                array[index],
+                *current,
             );
         }
 
@@ -96,24 +96,12 @@ mod lib {
     /// The maximum distance between two numbers of the array
     pub fn get_consecutive_max_range(array: &[i32]) -> i32 {
 
-        use std::cmp::{
-            min,
-            max,
-        };
-
-        let mut minimum = min(
-            array[0],
-            array[1],
-        );
-
-        let mut maximum = max(
-            array[0],
-            array[1],
-        );
+        let mut minimum = array[0];
+        let mut maximum = array[1];
 
         let mut distance = maximum - minimum;
 
-        for current in array.iter().skip(2) {
+        for current in array.iter() {
 
             minimum = min(
                 minimum,
