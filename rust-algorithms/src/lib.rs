@@ -49,6 +49,41 @@ mod lib {
 
         maximum
     }
+
+    /// Finds the greatest possible distance between two items from array in O(n) time and O(1) space
+    ///
+    /// # Args:
+    ///
+    /// array - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// The maximum distance between two numbers of the array
+    pub fn get_max_range(array: &[i32]) -> i32
+    {
+        use std::cmp::{
+            min,
+            max,
+        };
+
+        let mut minimum = array[0];
+        let mut maximum = array[1];
+
+        for index in 1..array.len() {
+
+            minimum = min(
+                minimum,
+                array[index],
+            );
+
+            maximum = max(
+                maximum,
+                array[index],
+            );
+        }
+
+        (maximum - minimum).abs()
+    }
 }
 
 #[cfg(test)]
