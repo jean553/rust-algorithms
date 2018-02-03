@@ -60,7 +60,7 @@ let max_distance = get_max_consecutive_range(&array); // 5
 
 ### get_missing_value(array)
 
-Returns the missing value from an array of consecutives values.
+Returns the missing value from an array of consecutives value, O(n) time and O(1) space.
 
 ```rust
 let array: [u32; 4] = [4, 2, 1, 5];
