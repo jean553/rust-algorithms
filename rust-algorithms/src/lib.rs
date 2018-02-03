@@ -1,4 +1,4 @@
-//! Rust common routines implementation.
+#[allow(dead_code)]
 
 mod lib {
 
