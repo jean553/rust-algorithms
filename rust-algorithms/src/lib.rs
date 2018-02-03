@@ -69,16 +69,16 @@ mod lib {
         let mut minimum = array[0];
         let mut maximum = array[1];
 
-        for index in 0..array.len() {
+        for current in array.iter() {
 
             minimum = min(
                 minimum,
-                array[index],
+                *current,
             );
 
             maximum = max(
                 maximum,
-                array[index],
+                *current,
             );
         }
 
