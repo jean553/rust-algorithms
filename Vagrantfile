@@ -11,13 +11,8 @@ Vagrant.configure(2) do |config|
   config.vm.define "dev", primary: true do |app|
     app.vm.provider "docker" do |d|
       d.image = "allansimon/docker-dev-rust"
-
       d.name = "#{PROJECT}_dev"
-
-      d.link "#{PROJECT}_db:db"
-
       d.has_ssh = true
-
       d.env = {
         "HOST_USER_UID" => Process.euid,
       }
