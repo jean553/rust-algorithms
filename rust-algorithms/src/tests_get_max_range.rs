@@ -17,6 +17,9 @@ mod tests {
         ];
 
         assert_eq!(get_max_range(&array), 170);
+
+        let array: [i32; 7] = [0, 1, -2, 0, 3, 2, 5];
+        assert_eq!(get_max_range(&array), 7);
     }
 
     #[test]
