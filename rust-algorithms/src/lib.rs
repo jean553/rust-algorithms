@@ -8,6 +8,8 @@ mod lib {
         max,
     };
 
+    use std::default::Default;
+
     /// Finds the minimum value of an array in O(n) time and O(1) space
     ///
     /// # Args:
@@ -269,6 +271,48 @@ mod lib {
 
         product_of_three
     }
+
+    /// Merge ranges of tuples (start, end), taking O(n log n) time worst case (O(n) best case) and O(n) space.
+    ///
+    /// # Args:
+    ///
+    /// `array` - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// a new array with the merged items
+    pub fn merge_ranges(ranges: &[(i32, i32); 5]) -> Vec<(i32, i32)> {
+
+        /* sort the array first to make computation easier */
+
+        let mut copied_ranges: [(i32, i32); 5] = Default::default();
+        copied_ranges.copy_from_slice(ranges);
+        copied_ranges.sort(); // O(n log n)
+
+        let mut result: Vec<(i32, i32)> = Vec::new();
+        result.push(copied_ranges[0]);
+
+        /* for each item, check if the start is equal or lesser
+           than the previous item end: if yes, merge the two;
+           if no, append the current item into the result;
+           as the array is sorted, we can browse it only once */
+
+        for range in copied_ranges.iter().skip(1) {
+
+            {
+                let previous_range = &mut result.last_mut().unwrap();
+
+                if range.0 <= previous_range.1 {
+                    previous_range.1 = range.1;
+                    continue;
+                }
+            }
+
+            result.push(*range);
+        }
+
+        result
+    }
 }
 
 #[cfg(test)]
@@ -291,3 +335,6 @@ mod tests_product_all_items_except_current;
 
 #[cfg(test)]
 mod tests_get_max_product_of_three;
+
+#[cfg(test)]
+mod tests_merge_ranges;
