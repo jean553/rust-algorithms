@@ -26,6 +26,29 @@ mod lib {
 
         minimum
     }
+
+    /// Finds the maximum value of an array in O(n) time and O(1) space
+    ///
+    /// # Args:
+    ///
+    /// array - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// the maximum value from the array
+    pub fn max<T>(array: &[T]) -> T
+        where T: PartialOrd + Copy
+    {
+        let mut maximum = array[0];
+
+        for current in array.iter() {
+            if *current > maximum {
+                maximum = *current;
+            }
+        }
+
+        maximum
+    }
 }
 
 #[cfg(test)]
