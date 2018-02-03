@@ -101,19 +101,12 @@ mod lib {
             max,
         };
 
-        let mut minimum = min(
-            array[0],
-            array[1],
-        );
-
-        let mut maximum = max(
-            array[0],
-            array[1],
-        );
+        let mut minimum = array[0];
+        let mut maximum = array[1];
 
         let mut distance = maximum - minimum;
 
-        for current in array.iter().skip(2) {
+        for current in array.iter() {
 
             minimum = min(
                 minimum,
