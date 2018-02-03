@@ -91,3 +91,6 @@ mod tests_min;
 
 #[cfg(test)]
 mod tests_max;
+
+#[cfg(test)]
+mod tests_get_max_range;
