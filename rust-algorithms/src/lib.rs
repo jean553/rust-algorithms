@@ -53,3 +53,6 @@ mod lib {
 
 #[cfg(test)]
 mod tests_min;
+
+#[cfg(test)]
+mod tests_max;
