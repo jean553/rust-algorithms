@@ -84,6 +84,61 @@ mod lib {
 
         (maximum - minimum).abs()
     }
+
+    /// Find the greatest possible distance between consecutive items from array in O(n) time and O(1) space
+    ///
+    /// # Args:
+    ///
+    /// array - the concerned array
+    ///
+    /// # Returns:
+    ///
+    /// The maximum distance between two numbers of the array
+    pub fn get_consecutive_max_range(array: &[i32]) -> i32 {
+
+        use std::cmp::{
+            min,
+            max,
+        };
+
+        let mut minimum = min(
+            array[0],
+            array[1],
+        );
+
+        let mut maximum = max(
+            array[0],
+            array[1],
+        );
+
+        let mut distance = maximum - minimum;
+
+        for current in array.iter().skip(2) {
+
+            minimum = min(
+                minimum,
+                *current,
+            );
+
+            maximum = max(
+                maximum,
+                *current,
+            );
+
+            let updated_distance = max(
+                distance,
+                (maximum - minimum).abs(),
+            );
+
+            if updated_distance != distance {
+                distance = updated_distance;
+                minimum = *current;
+                maximum = *current;
+            }
+        }
+
+        distance
+    }
 }
 
 #[cfg(test)]
@@ -94,3 +149,6 @@ mod tests_max;
 
 #[cfg(test)]
 mod tests_get_max_range;
+
+#[cfg(test)]
+mod tests_get_consecutive_max_range;
