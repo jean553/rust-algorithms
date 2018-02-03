@@ -11,7 +11,9 @@ mod lib {
     /// # Returns:
     ///
     /// the minimum value from the array
-    pub fn min(array: &[u8]) -> u8 {
+    pub fn min<T>(array: &[T]) -> T
+        where T: PartialOrd + Copy
+    {
 
         let mut minimum = array[0];
 
