@@ -317,24 +317,10 @@ mod lib {
 
 #[cfg(test)]
 mod tests_min;
-
-#[cfg(test)]
 mod tests_max;
-
-#[cfg(test)]
 mod tests_get_max_range;
-
-#[cfg(test)]
 mod tests_get_consecutive_max_range;
-
-#[cfg(test)]
 mod tests_get_missing_number;
-
-#[cfg(test)]
 mod tests_product_all_items_except_current;
-
-#[cfg(test)]
 mod tests_get_max_product_of_three;
-
-#[cfg(test)]
 mod tests_merge_ranges;
