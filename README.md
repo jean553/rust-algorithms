@@ -162,6 +162,10 @@ let sums_amount = get_sum_numbers_combinations_for_amount(
 Returns all the possible permutations amount (with repetitions)
 according to a total amount of items and an items amount to include into the selection.
 
+```
+The amount of possible permutations (order matters) with repetitions for a total set of length n and a selection of length k is n^k.
+```
+
 ```rust
 let possible_permutations_amount = permutations_with_repetitions(10, 4); // 10000
 ```
