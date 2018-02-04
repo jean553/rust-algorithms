@@ -313,6 +313,42 @@ mod lib {
 
         result
     }
+
+    /// Get the quantity of numbers combinations to make the sum for a given amount, taking O(n * m) time and O(n) space.
+    ///
+    /// # Args:
+    ///
+    /// `allowed_numbers` - the numbers allowed to make the sum
+    /// `amount` - the amount for which one combinations of sums amount must be found
+    ///
+    /// # Returns:
+    ///
+    /// Quantity of possible sums with given numbers for the specified amount
+    pub fn get_sum_numbers_combinations_quantity_for_amount(
+        allowed_numbers: &[u8],
+        amount: u32,
+    ) -> u32 {
+
+        /* add 1 because 0 must be considered */
+        let mut results: Vec<u32> = vec![0; (amount + 1) as usize];
+
+        /* there is one combination to have an amount of 0 */
+        results[0] = 1;
+
+        for allowed_number in allowed_numbers.iter() {
+
+            for index in 0..results.len() {
+
+                if index < *allowed_number as usize {
+                    continue;
+                }
+
+                results[index] += results[index - *allowed_number as usize];
+            }
+        }
+
+        results[amount as usize]
+    }
 }
 
 #[cfg(test)]
@@ -324,3 +360,4 @@ mod tests_get_missing_number;
 mod tests_product_all_items_except_current;
 mod tests_get_max_product_of_three;
 mod tests_merge_ranges;
+mod tests_get_sum_numbers_combinations_quantity_for_amount;
