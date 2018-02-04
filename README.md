@@ -131,3 +131,28 @@ let sums_amount = get_sum_numbers_combinations_quantity_for_amount(
    2, 2, 2, 2, 2, 5
 */
 ```
+
+### get_sum_numbers_combinations_for_amount(allowed_numbers, amount)
+
+Find all the possible combinations of numbers (using the "allowed numbers" only)
+to make the sum for a given amount "amount".
+The time complexity is O(n * m * o) and the space complexity is O(n * m).
+
+```rust
+let allowed_numbers: [u8; 3] = [2, 4, 5];
+let amount: u32 = 15;
+
+let sums_amount = get_sum_numbers_combinations_for_amount(
+    &allowed_numbers,
+    amount,
+);
+
+/*
+    [
+        [5, 5, 5],
+        [2, 4, 4, 5],
+        [2, 2, 2, 4, 5],
+        [2, 2, 2, 2, 2, 5],
+    ]
+*/
+```
