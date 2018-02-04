@@ -103,3 +103,31 @@ let ranges: [(i32, i32); 5] = [
 
 let result = get_merge_ranges(&ranges); // [(-6, -3), (2, 7), (8, 10)]
 ```
+
+### get_sum_numbers_combinations_quantity_for_amount(allowed_numbers, amount)
+
+Find the quantity of the all the possible combinations to make a sum
+using the "allowed numbers" that is equal to the expected "amount".
+The time complexity is O(n * m) as two arrays of different content
+are browsed (one with the possible numbers, one with the results).
+The space complexity is O(n) as we have to create a new array
+based on the given input.
+
+```rust
+let allowed_numbers: [u8; 3] = [2, 4, 5];
+let amount: u32 = 15;
+
+let sums_amount = get_sum_numbers_combinations_quantity_for_amount(
+    &allowed_numbers,
+    amount,
+);
+
+/* sums_amount = 4
+
+   solutions:
+   5, 5, 5
+   2, 4, 4, 5
+   2, 2, 2, 4, 5
+   2, 2, 2, 2, 2, 5
+*/
+```
