@@ -156,3 +156,12 @@ let sums_amount = get_sum_numbers_combinations_for_amount(
     ]
 */
 ```
+
+### permutations_with_repetitions(total_amount, selection_amount)
+
+Returns all the possible permutations amount (with repetitions)
+according to a total amount of items and an items amount to include into the selection.
+
+```rust
+let possible_permutations_amount = permutations_with_repetitions(10, 4); // 10000
+```

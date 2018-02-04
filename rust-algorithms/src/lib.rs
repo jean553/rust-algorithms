@@ -395,6 +395,24 @@ mod lib {
 
         results[amount as usize].clone()
     }
+
+    /// Returns the number of possible permutations (order matters) from a set when repetitions are allowed
+    ///
+    /// # Args:
+    ///
+    /// `total_items_amount` - the total items amount from the source set
+    /// `selection_items_amount` - the amount of items to select into one permutation
+    ///
+    /// # Returns:
+    ///
+    /// The possible amount of permutations
+    pub fn permutations_with_repetitions(
+        total_items_amount: u32,
+        selection_items_amount: u32,
+    ) -> u32 {
+        /* permutations amount = total_amount^selection_amount */
+        total_items_amount.pow(selection_items_amount)
+    }
 }
 
 #[cfg(test)]
@@ -408,3 +426,4 @@ mod tests_get_max_product_of_three;
 mod tests_merge_ranges;
 mod tests_get_sum_numbers_combinations_quantity_for_amount;
 mod tests_get_sum_numbers_combinations_for_amount;
+mod tests_permutations_with_repetitions;
