@@ -349,6 +349,52 @@ mod lib {
 
         results[amount as usize]
     }
+
+    /// Returns all the combinations of numbers for which the sums make the given amount suing the given allowed numbers
+    ///
+    /// # Args:
+    ///
+    /// `allowed_numbers` - the numbers allowed to make the sum
+    /// `amount` - the amount for which one combinations of sums amount must be found
+    ///
+    /// # Returns:
+    ///
+    /// Possible combinations with given numbers for the specified amount
+    pub fn get_sum_numbers_combinations_for_amount(
+        allowed_numbers: &[u8],
+        amount: u32,
+    ) -> Vec<Vec<u32>> {
+
+        let mut results: Vec<Vec<Vec<u32>>> = vec![
+            vec![];
+            (amount + 1) as usize
+        ];
+
+        for allowed_number in allowed_numbers.iter() {
+
+            for index in 0..results.len() {
+
+                if index < *allowed_number as usize {
+                    continue;
+                }
+
+                let previous_index = index - *allowed_number as usize;
+
+                if previous_index == 0 {
+                    results[index].push(vec![*allowed_number as u32]);
+                    continue;
+                }
+
+                let mut new_combinations = results[previous_index].clone();
+                for new_combination in new_combinations.iter_mut() {
+                    new_combination.push(*allowed_number as u32);
+                    results[index].push(new_combination.clone());
+                }
+            }
+        }
+
+        results[amount as usize].clone()
+    }
 }
 
 #[cfg(test)]
@@ -361,3 +407,4 @@ mod tests_product_all_items_except_current;
 mod tests_get_max_product_of_three;
 mod tests_merge_ranges;
 mod tests_get_sum_numbers_combinations_quantity_for_amount;
+mod tests_get_sum_numbers_combinations_for_amount;
