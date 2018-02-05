@@ -170,18 +170,37 @@ The amount of possible permutations (order matters) with repetitions for a total
 let possible_permutations_amount = permutations_with_repetitions(10, 4); // 10000
 ```
 
-### get_all_permutations_with_repetitions(array)
+### get_all_permutations_with_repetitions(array, selection_amount)
 
 Returns all the possible permutations (with repetitions) of the given items from the array.
 
 ```rust
 let array: [u8; 2] = [1, 2];
-let permutations = get_all_permutations_with_repetitions(&array);
+let permutations = get_all_permutations_with_repetitions(&array, 2);
 
 /*
 [1, 1],
 [1, 2],
 [2, 1],
 [2, 2]
+*/
+```
+
+This is also possible to define the size of all the returned permutations:
+
+```rust
+let array: [u8; 3] = [1, 2, 3];
+let permutations = get_all_permutations_with_repetitions(&array, 2);
+
+/*
+[1, 1],
+[1, 2],
+[1, 3],
+[2, 1],
+[2, 2],
+[2, 3],
+[3, 1],
+[3, 2],
+[3, 3]
 */
 ```
