@@ -429,8 +429,7 @@ mod lib {
     pub fn get_all_permutations_with_repetitions(
         array: &[u8],
         selection_amount: usize,
-    )
-        -> HashSet<Vec<u8>> {
+    ) -> HashSet<Vec<u8>> {
 
         let length = array.len();
 
@@ -450,11 +449,9 @@ mod lib {
 
         for result in results.iter() {
 
-            let mut final_result: Vec<u8> = Vec::with_capacity(selection_amount);
-            for index in 0..selection_amount {
-                final_result.push(result[index]);
-            }
-            filtered_results.insert(final_result);
+            let mut result = (*result).clone();
+            result.truncate(selection_amount);
+            filtered_results.insert(result);
         }
 
         filtered_results
