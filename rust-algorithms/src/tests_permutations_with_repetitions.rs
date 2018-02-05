@@ -28,13 +28,43 @@ mod tests {
 
         let array: [u8; 2] = [1, 2];
 
-        let all_permutations = get_all_permutations_with_repetitions(&array);
+        let all_permutations = get_all_permutations_with_repetitions(
+            &array,
+            2,
+        );
 
         let mut result: HashSet<Vec<u8>> = HashSet::new();
         result.insert(vec![1, 1]);
         result.insert(vec![1, 2]);
         result.insert(vec![2, 1]);
         result.insert(vec![2, 2]);
+
+        assert_eq!(
+            all_permutations,
+            result,
+        );
+    }
+
+    #[test]
+    fn test_print_some_permutations_with_repetitions() {
+
+        let array: [u8; 3] = [1, 2, 3];
+
+        let all_permutations = get_all_permutations_with_repetitions(
+            &array,
+            2,
+        );
+
+        let mut result: HashSet<Vec<u8>> = HashSet::new();
+        result.insert(vec![1, 1]);
+        result.insert(vec![1, 2]);
+        result.insert(vec![1, 3]);
+        result.insert(vec![2, 1]);
+        result.insert(vec![2, 2]);
+        result.insert(vec![2, 3]);
+        result.insert(vec![3, 1]);
+        result.insert(vec![3, 2]);
+        result.insert(vec![3, 3]);
 
         assert_eq!(
             all_permutations,

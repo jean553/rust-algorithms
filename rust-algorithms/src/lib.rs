@@ -421,14 +421,15 @@ mod lib {
     /// # Args:
     ///
     /// `array` - the source array to use with all the items
-    /// `total_amount` - the total amount of items into the array
-    /// `expected_amount` - the selection amount of items
+    /// `selection_amount` - the selection items amount (max = array length)
     ///
     /// # Returns:
     ///
     /// set with all the permutations with repetitions
-    pub fn get_all_permutations_with_repetitions(array: &[u8])
-        -> HashSet<Vec<u8>> {
+    pub fn get_all_permutations_with_repetitions(
+        array: &[u8],
+        selection_amount: usize,
+    ) -> HashSet<Vec<u8>> {
 
         let length = array.len();
 
@@ -444,7 +445,16 @@ mod lib {
             depth,
         );
 
-        results
+        let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
+
+        for result in results.iter() {
+
+            let mut result = (*result).clone();
+            result.truncate(selection_amount);
+            filtered_results.insert(result);
+        }
+
+        filtered_results
     }
 
     /// Recursive function for permutations calculation.
