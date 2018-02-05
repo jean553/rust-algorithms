@@ -10,6 +10,8 @@ mod lib {
 
     use std::default::Default;
 
+    use std::collections::HashSet;
+
     /// Finds the minimum value of an array in O(n) time and O(1) space
     ///
     /// # Args:
@@ -412,6 +414,76 @@ mod lib {
     ) -> u32 {
         /* permutations amount = total_amount^selection_amount */
         total_items_amount.pow(selection_items_amount)
+    }
+
+    /// Prints all the permutations (with repetitions) for the given array.
+    ///
+    /// # Args:
+    ///
+    /// `array` - the source array to use with all the items
+    /// `total_amount` - the total amount of items into the array
+    /// `expected_amount` - the selection amount of items
+    ///
+    /// # Returns:
+    ///
+    /// set with all the permutations with repetitions
+    pub fn get_all_permutations_with_repetitions(array: &[u8])
+        -> HashSet<Vec<u8>> {
+
+        let length = array.len();
+
+        let mut buffer: Vec<u8> = vec![0; length as usize];
+        let mut results: HashSet<Vec<u8>> = HashSet::new();
+        let depth = 0;
+
+        permutations(
+            &array,
+            &mut buffer,
+            &mut results,
+            length,
+            depth,
+        );
+
+        results
+    }
+
+    /// Recursive function for permutations calculation.
+    ///
+    /// # Args:
+    ///
+    /// `array` - the array with all the items of the set
+    /// `buffer` - mutable reference to the buffer used to store every single permutation
+    /// `results` - the set where to insert the solution one by one (guarantees unicity)
+    /// `length` - the length of the items array
+    /// `depth` - the current depth during browsing of solutions
+    fn permutations(
+        array: &[u8],
+        mut buffer: &mut Vec<u8>,
+        mut results: &mut HashSet<Vec<u8>>,
+        length: usize,
+        depth: usize,
+    ) {
+
+        for value in array.iter() {
+
+            if depth < length {
+
+                buffer[depth as usize] = *value;
+
+                permutations(
+                    &array,
+                    &mut buffer,
+                    &mut results,
+                    length,
+                    depth + 1,
+                );
+            } else {
+
+                let mut one_result: Vec<u8> = vec![0; length];
+                one_result.clone_from_slice(buffer);
+                results.insert(one_result);
+            }
+        }
     }
 }
 
