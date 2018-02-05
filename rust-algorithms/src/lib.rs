@@ -434,7 +434,7 @@ mod lib {
 
         let mut buffer: Vec<u8> = vec![0; length as usize];
         let mut results: HashSet<Vec<u8>> = HashSet::new();
-        let mut depth = 0;
+        let depth = 0;
 
         permutations(
             &array,
@@ -461,7 +461,7 @@ mod lib {
         mut buffer: &mut Vec<u8>,
         mut results: &mut HashSet<Vec<u8>>,
         length: usize,
-        mut depth: usize,
+        depth: usize,
     ) {
 
         for value in array.iter() {
@@ -478,6 +478,7 @@ mod lib {
                     depth + 1,
                 );
             } else {
+
                 let mut one_result: Vec<u8> = vec![0; length];
                 one_result.clone_from_slice(buffer);
                 results.insert(one_result);
