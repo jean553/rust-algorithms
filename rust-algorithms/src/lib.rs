@@ -437,12 +437,16 @@ mod lib {
         let mut results: HashSet<Vec<u8>> = HashSet::new();
         let depth = 0;
 
+        let mut browsed: Vec<u8> = Vec::new();
+
         permutations(
             &array,
             &mut buffer,
             &mut results,
             length,
             depth,
+            true,
+            browsed,
         );
 
         let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
@@ -472,11 +476,24 @@ mod lib {
         mut results: &mut HashSet<Vec<u8>>,
         length: usize,
         depth: usize,
+        repetitions_allowed: bool,
+        mut browsed: Vec<u8>,
     ) {
 
         for value in array.iter() {
 
+            let mut new_browsed: Vec<u8> = browsed.clone();
+
             if depth < length {
+
+                if !repetitions_allowed {
+
+                    if new_browsed.contains(value) {
+                        continue;
+                    }
+
+                    new_browsed.push(*value);
+                }
 
                 buffer[depth as usize] = *value;
 
@@ -486,6 +503,8 @@ mod lib {
                     &mut results,
                     length,
                     depth + 1,
+                    repetitions_allowed,
+                    new_browsed.clone(),
                 );
             } else {
 
