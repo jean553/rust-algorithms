@@ -513,6 +513,27 @@ mod lib {
 
         return value * factorial(value - 1);
     }
+
+    /// Returns the number of possible permutations (order matters) from a set when repetitions are not allowed
+    ///
+    /// # Args:
+    ///
+    /// `total_items_amount` - the total items amount from the source set
+    /// `selection_items_amount` - the amount of items to select into one permutation
+    ///
+    /// # Returns:
+    ///
+    /// The possible amount of permutations
+    pub fn permutations_without_repetition(
+        total_items_amount: u32,
+        selection_items_amount: u32,
+    ) -> u32 {
+
+        (
+            factorial(total_items_amount) /
+            factorial(total_items_amount - selection_items_amount)
+        )
+    }
 }
 
 #[cfg(test)]
@@ -528,3 +549,4 @@ mod tests_get_sum_numbers_combinations_quantity_for_amount;
 mod tests_get_sum_numbers_combinations_for_amount;
 mod tests_permutations_with_repetitions;
 mod tests_factorial;
+mod tests_permutations_without_repetition;
