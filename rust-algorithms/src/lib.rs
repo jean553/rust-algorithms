@@ -495,6 +495,24 @@ mod lib {
             }
         }
     }
+
+    /// Recursive factorial calculation
+    ///
+    /// # Args:
+    ///
+    /// `value` - the value to compute
+    ///
+    /// # Returns:
+    ///
+    /// factorial result
+    pub fn factorial(value: u32) -> u32 {
+
+        if value == 1 {
+            return 1;
+        }
+
+        return value * factorial(value - 1);
+    }
 }
 
 #[cfg(test)]
