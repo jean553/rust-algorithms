@@ -426,9 +426,10 @@ mod lib {
     /// # Returns:
     ///
     /// set with all the permutations with repetitions
-    pub fn get_all_permutations_with_repetitions(
+    pub fn get_all_permutations(
         array: &[u8],
         selection_amount: usize,
+        repetitions_allowed: bool,
     ) -> HashSet<Vec<u8>> {
 
         let length = array.len();
@@ -437,12 +438,16 @@ mod lib {
         let mut results: HashSet<Vec<u8>> = HashSet::new();
         let depth = 0;
 
+        let browsed: Vec<u8> = Vec::new();
+
         permutations(
             &array,
             &mut buffer,
             &mut results,
             length,
             depth,
+            repetitions_allowed,
+            browsed,
         );
 
         let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
@@ -466,17 +471,34 @@ mod lib {
     /// `results` - the set where to insert the solution one by one (guarantees unicity)
     /// `length` - the length of the items array
     /// `depth` - the current depth during browsing of solutions
+    /// `repetitions_allowed` - indicates if repetitions are allowed into the results
+    /// `browsed` - the browsed items into the current recursion (prevents repetitions if required)
     fn permutations(
         array: &[u8],
         mut buffer: &mut Vec<u8>,
         mut results: &mut HashSet<Vec<u8>>,
         length: usize,
         depth: usize,
+        repetitions_allowed: bool,
+        browsed: Vec<u8>,
     ) {
 
         for value in array.iter() {
 
+            /* FIXME: bad design, if repetitions are not allowed,
+               we simply create an useless container for every iteration */
+            let mut new_browsed: Vec<u8> = browsed.clone();
+
             if depth < length {
+
+                if !repetitions_allowed {
+
+                    if new_browsed.contains(value) {
+                        continue;
+                    }
+
+                    new_browsed.push(*value);
+                }
 
                 buffer[depth as usize] = *value;
 
@@ -486,6 +508,8 @@ mod lib {
                     &mut results,
                     length,
                     depth + 1,
+                    repetitions_allowed,
+                    new_browsed.clone(),
                 );
             } else {
 
