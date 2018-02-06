@@ -449,16 +449,10 @@ mod lib {
             browsed,
         );
 
-        let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
-
-        for result in results.iter() {
-
-            let mut result = (*result).clone();
-            result.truncate(selection_amount);
-            filtered_results.insert(result);
-        }
-
-        filtered_results
+        get_filtered_results_by_selection_amount(
+            results,
+            selection_amount,
+        )
     }
 
     /// Recursive function for permutations calculation.
@@ -590,6 +584,27 @@ mod lib {
             false,
             browsed,
         );
+
+        get_filtered_results_by_selection_amount(
+            results,
+            selection_amount,
+        )
+    }
+
+    /// Returns the given results container by filtering by selection amount (only keeps the first "selection_amount" items of every result)
+    ///
+    /// # Args:
+    ///
+    /// `results` - set of the results to filter
+    /// `selection_amount` - number of items to keep per result (first items)
+    ///
+    /// # Returns:
+    ///
+    /// filtered set of results
+    fn get_filtered_results_by_selection_amount(
+        results: HashSet<Vec<u8>>,
+        selection_amount: usize,
+    ) -> HashSet<Vec<u8>> {
 
         let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
 
