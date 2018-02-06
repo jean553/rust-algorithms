@@ -212,3 +212,16 @@ Recursive factorial calculation.
 ```rust
 let result = factorial(4); // 24
 ```
+
+### permutations_without_repetitions(total_amount, selection_amount)
+
+Returns all the possible permutations amount without allowing repetitions,
+according to a total amount of items and an items amount to include into the selection.
+
+```
+The amount of possible permutations (order matters) without repetitions for a total set of length n and a selection of length k is n!/(n-k)!.
+```
+
+```rust
+let possible_permutations_amount = permutations_without_repetition(5, 2); // 60
+```
