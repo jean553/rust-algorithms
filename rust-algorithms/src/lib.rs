@@ -437,7 +437,7 @@ mod lib {
         let mut results: HashSet<Vec<u8>> = HashSet::new();
         let depth = 0;
 
-        let mut browsed: Vec<u8> = Vec::new();
+        let browsed: Vec<u8> = Vec::new();
 
         permutations(
             &array,
@@ -479,11 +479,13 @@ mod lib {
         length: usize,
         depth: usize,
         repetitions_allowed: bool,
-        mut browsed: Vec<u8>,
+        browsed: Vec<u8>,
     ) {
 
         for value in array.iter() {
 
+            /* FIXME: bad design, if repetitions are not allowed,
+               we simply create an useless container for every iteration */
             let mut new_browsed: Vec<u8> = browsed.clone();
 
             if depth < length {
@@ -574,7 +576,7 @@ mod lib {
         let mut results: HashSet<Vec<u8>> = HashSet::new();
         let depth = 0;
 
-        let mut browsed: Vec<u8> = Vec::new();
+        let browsed: Vec<u8> = Vec::new();
 
         permutations(
             &array,
