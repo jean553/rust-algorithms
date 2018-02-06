@@ -41,4 +41,19 @@ mod tests {
             result,
         );
     }
+
+    #[test]
+    fn test_get_all_permutations_without_repetition_with_two_items() {
+
+        let array: [u8; 2] = [1, 2];
+
+        let mut result: HashSet<Vec<u8>> = HashSet::new();
+        result.insert(vec![1, 2]);
+        result.insert(vec![2, 1]);
+
+        assert_eq!(
+            get_all_permutations_without_repetition(&array),
+            result,
+        );
+    }
 }
