@@ -3,7 +3,7 @@ mod tests {
 
     use lib::{
         permutations_with_repetitions,
-        get_all_permutations_with_repetitions,
+        get_all_permutations,
     };
 
     use std::collections::HashSet;
@@ -28,9 +28,10 @@ mod tests {
 
         let array: [u8; 2] = [1, 2];
 
-        let all_permutations = get_all_permutations_with_repetitions(
+        let all_permutations = get_all_permutations(
             &array,
             2,
+            true,
         );
 
         let mut result: HashSet<Vec<u8>> = HashSet::new();
@@ -50,9 +51,10 @@ mod tests {
 
         let array: [u8; 3] = [1, 2, 3];
 
-        let all_permutations = get_all_permutations_with_repetitions(
+        let all_permutations = get_all_permutations(
             &array,
             2,
+            true,
         );
 
         let mut result: HashSet<Vec<u8>> = HashSet::new();

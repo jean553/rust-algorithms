@@ -3,7 +3,7 @@ mod tests {
 
     use lib::{
         permutations_without_repetition,
-        get_all_permutations_without_repetition,
+        get_all_permutations,
     };
 
     use std::collections::HashSet;
@@ -38,9 +38,10 @@ mod tests {
         result.insert(vec![3, 2, 1]);
 
         assert_eq!(
-            get_all_permutations_without_repetition(
+            get_all_permutations(
                 &array,
                 selection_amount,
+                false,
             ),
             result,
         );
@@ -57,9 +58,10 @@ mod tests {
         result.insert(vec![2, 1]);
 
         assert_eq!(
-            get_all_permutations_without_repetition(
+            get_all_permutations(
                 &array,
                 selection_amount,
+                false,
             ),
             result,
         );
@@ -80,9 +82,10 @@ mod tests {
         result.insert(vec![3, 2]);
 
         assert_eq!(
-            get_all_permutations_without_repetition(
+            get_all_permutations(
                 &array,
                 selection_amount,
+                false,
             ),
             result,
         );

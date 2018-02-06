@@ -426,9 +426,10 @@ mod lib {
     /// # Returns:
     ///
     /// set with all the permutations with repetitions
-    pub fn get_all_permutations_with_repetitions(
+    pub fn get_all_permutations(
         array: &[u8],
         selection_amount: usize,
+        repetitions_allowed: bool,
     ) -> HashSet<Vec<u8>> {
 
         let length = array.len();
@@ -445,14 +446,20 @@ mod lib {
             &mut results,
             length,
             depth,
-            true,
+            repetitions_allowed,
             browsed,
         );
 
-        get_filtered_results_by_selection_amount(
-            results,
-            selection_amount,
-        )
+        let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
+
+        for result in results.iter() {
+
+            let mut result = (*result).clone();
+            result.truncate(selection_amount);
+            filtered_results.insert(result);
+        }
+
+        filtered_results
     }
 
     /// Recursive function for permutations calculation.
@@ -550,72 +557,6 @@ mod lib {
             factorial(total_items_amount) /
             factorial(total_items_amount - selection_items_amount)
         )
-    }
-
-    /// Prints all the permutations (without repetitions) for the given array.
-    ///
-    /// # Args:
-    ///
-    /// `array` - the source array to use with all the items
-    /// `selection_amount` - the selection items amount
-    ///
-    /// # Returns:
-    ///
-    /// set with all the permutations without repetitions
-    pub fn get_all_permutations_without_repetition(
-        array: &[u8],
-        selection_amount: usize,
-    ) -> HashSet<Vec<u8>> {
-
-        let length = array.len();
-
-        let mut buffer: Vec<u8> = vec![0; length as usize];
-        let mut results: HashSet<Vec<u8>> = HashSet::new();
-        let depth = 0;
-
-        let browsed: Vec<u8> = Vec::new();
-
-        permutations(
-            &array,
-            &mut buffer,
-            &mut results,
-            length,
-            depth,
-            false,
-            browsed,
-        );
-
-        get_filtered_results_by_selection_amount(
-            results,
-            selection_amount,
-        )
-    }
-
-    /// Returns the given results container by filtering by selection amount (only keeps the first "selection_amount" items of every result)
-    ///
-    /// # Args:
-    ///
-    /// `results` - set of the results to filter
-    /// `selection_amount` - number of items to keep per result (first items)
-    ///
-    /// # Returns:
-    ///
-    /// filtered set of results
-    fn get_filtered_results_by_selection_amount(
-        results: HashSet<Vec<u8>>,
-        selection_amount: usize,
-    ) -> HashSet<Vec<u8>> {
-
-        let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
-
-        for result in results.iter() {
-
-            let mut result = (*result).clone();
-            result.truncate(selection_amount);
-            filtered_results.insert(result);
-        }
-
-        filtered_results
     }
 }
 
