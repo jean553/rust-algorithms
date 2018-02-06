@@ -225,3 +225,17 @@ The amount of possible permutations (order matters) without repetitions for a to
 ```rust
 let possible_permutations_amount = permutations_without_repetition(5, 2); // 60
 ```
+
+### get_all_permutations_without_repetition(array)
+
+Returns all the possible permutations without allowing repetitions.
+
+```rust
+let items: [u8; 2] = [1, 2];
+let permutations = get_all_permutations_without_repetition(items);
+
+/*
+[1, 2]
+[2, 1]
+*/
+```
