@@ -553,6 +553,30 @@ mod lib {
             factorial(total_items_amount - selection_items_amount)
         )
     }
+
+    pub fn get_all_permutations_without_repetition(array: &[u8])
+        -> HashSet<Vec<u8>> {
+
+        let length = array.len();
+
+        let mut buffer: Vec<u8> = vec![0; length as usize];
+        let mut results: HashSet<Vec<u8>> = HashSet::new();
+        let depth = 0;
+
+        let mut browsed: Vec<u8> = Vec::new();
+
+        permutations(
+            &array,
+            &mut buffer,
+            &mut results,
+            length,
+            depth,
+            false,
+            browsed,
+        );
+
+        results
+    }
 }
 
 #[cfg(test)]
