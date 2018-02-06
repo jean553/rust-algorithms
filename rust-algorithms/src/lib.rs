@@ -527,3 +527,4 @@ mod tests_merge_ranges;
 mod tests_get_sum_numbers_combinations_quantity_for_amount;
 mod tests_get_sum_numbers_combinations_for_amount;
 mod tests_permutations_with_repetitions;
+mod tests_factorial;
