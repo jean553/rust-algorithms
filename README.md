@@ -204,3 +204,11 @@ let permutations = get_all_permutations_with_repetitions(&array, 2);
 [3, 3]
 */
 ```
+
+### factorial(value)
+
+Recursive factorial calculation.
+
+```rust
+let result = factorial(4); // 24
+```

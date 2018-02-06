@@ -495,6 +495,24 @@ mod lib {
             }
         }
     }
+
+    /// Recursive factorial calculation
+    ///
+    /// # Args:
+    ///
+    /// `value` - the value to compute
+    ///
+    /// # Returns:
+    ///
+    /// factorial result
+    pub fn factorial(value: u32) -> u32 {
+
+        if value == 1 {
+            return 1;
+        }
+
+        return value * factorial(value - 1);
+    }
 }
 
 #[cfg(test)]
@@ -509,3 +527,4 @@ mod tests_merge_ranges;
 mod tests_get_sum_numbers_combinations_quantity_for_amount;
 mod tests_get_sum_numbers_combinations_for_amount;
 mod tests_permutations_with_repetitions;
+mod tests_factorial;
