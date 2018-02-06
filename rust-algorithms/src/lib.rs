@@ -563,12 +563,15 @@ mod lib {
     /// # Args:
     ///
     /// `array` - the source array to use with all the items
+    /// `selection_amount` - the selection items amount
     ///
     /// # Returns:
     ///
     /// set with all the permutations without repetitions
-    pub fn get_all_permutations_without_repetition(array: &[u8])
-        -> HashSet<Vec<u8>> {
+    pub fn get_all_permutations_without_repetition(
+        array: &[u8],
+        selection_amount: usize,
+    ) -> HashSet<Vec<u8>> {
 
         let length = array.len();
 
@@ -588,7 +591,16 @@ mod lib {
             browsed,
         );
 
-        results
+        let mut filtered_results: HashSet<Vec<u8>> = HashSet::new();
+
+        for result in results.iter() {
+
+            let mut result = (*result).clone();
+            result.truncate(selection_amount);
+            filtered_results.insert(result);
+        }
+
+        filtered_results
     }
 }
 
