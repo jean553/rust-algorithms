@@ -27,6 +27,7 @@ mod tests {
     fn test_get_all_permutations_without_repetition_with_three_items() {
 
         let array: [u8; 3] = [1, 2, 3];
+        let selection_amount = 3;
 
         let mut result: HashSet<Vec<u8>> = HashSet::new();
         result.insert(vec![1, 2, 3]);
@@ -37,7 +38,10 @@ mod tests {
         result.insert(vec![3, 2, 1]);
 
         assert_eq!(
-            get_all_permutations_without_repetition(&array),
+            get_all_permutations_without_repetition(
+                &array,
+                selection_amount,
+            ),
             result,
         );
     }
@@ -46,13 +50,40 @@ mod tests {
     fn test_get_all_permutations_without_repetition_with_two_items() {
 
         let array: [u8; 2] = [1, 2];
+        let selection_amount = 2;
 
         let mut result: HashSet<Vec<u8>> = HashSet::new();
         result.insert(vec![1, 2]);
         result.insert(vec![2, 1]);
 
         assert_eq!(
-            get_all_permutations_without_repetition(&array),
+            get_all_permutations_without_repetition(
+                &array,
+                selection_amount,
+            ),
+            result,
+        );
+    }
+
+    #[test]
+    fn test_get_all_permutations_without_repetition_with_three_items_and_select_two_items() {
+
+        let array: [u8; 3] = [1, 2, 3];
+        let selection_amount = 2;
+
+        let mut result: HashSet<Vec<u8>> = HashSet::new();
+        result.insert(vec![1, 2]);
+        result.insert(vec![1, 3]);
+        result.insert(vec![2, 1]);
+        result.insert(vec![2, 3]);
+        result.insert(vec![3, 1]);
+        result.insert(vec![3, 2]);
+
+        assert_eq!(
+            get_all_permutations_without_repetition(
+                &array,
+                selection_amount,
+            ),
             result,
         );
     }
