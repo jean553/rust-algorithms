@@ -470,6 +470,8 @@ mod lib {
     /// `results` - the set where to insert the solution one by one (guarantees unicity)
     /// `length` - the length of the items array
     /// `depth` - the current depth during browsing of solutions
+    /// `repetitions_allowed` - indicates if repetitions are allowed into the results
+    /// `browsed` - the browsed items into the current recursion (prevents repetitions if required)
     fn permutations(
         array: &[u8],
         mut buffer: &mut Vec<u8>,
@@ -554,6 +556,15 @@ mod lib {
         )
     }
 
+    /// Prints all the permutations (without repetitions) for the given array.
+    ///
+    /// # Args:
+    ///
+    /// `array` - the source array to use with all the items
+    ///
+    /// # Returns:
+    ///
+    /// set with all the permutations without repetitions
     pub fn get_all_permutations_without_repetition(array: &[u8])
         -> HashSet<Vec<u8>> {
 
