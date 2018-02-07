@@ -241,3 +241,7 @@ let permutations = get_all_permutations_without_repetition(items);
 [2, 1]
 */
 ```
+
+### at_linked_list(list, index)
+
+Returns the value at the given index from the given `LinkedListNode` item in O(n) time and O(1) space.
