@@ -12,6 +12,45 @@ mod lib {
 
     use std::collections::HashSet;
 
+    pub enum LinkedListNode {
+        Next(
+            u8,
+            Box<LinkedListNode>,
+        ),
+        End,
+    }
+
+    /// Returns the item at the given index from the linked list
+    ///
+    /// # Args:
+    ///
+    /// `node` - reference to the linked list to use
+    /// `index` - the index of the item to get
+    ///
+    /// # Returns:
+    ///
+    /// the data at the given index
+    pub fn at_linked_list(
+        mut node: &LinkedListNode,
+        index: usize,
+    ) -> u8 {
+
+        for _ in 0..index {
+
+            node = match node {
+                &LinkedListNode::Next(_, ref next) => &*next,
+                &LinkedListNode::End => &LinkedListNode::End,
+            };
+        }
+
+        if let LinkedListNode::Next(data, ref _next) = *node {
+            return data;
+        }
+
+        /* FIXME: should not return 0 */
+        0
+    }
+
     /// Finds the minimum value of an array in O(n) time and O(1) space
     ///
     /// # Args:
@@ -574,3 +613,4 @@ mod tests_get_sum_numbers_combinations_for_amount;
 mod tests_permutations_with_repetitions;
 mod tests_factorial;
 mod tests_permutations_without_repetition;
+mod tests_remove_from_linked_list;
