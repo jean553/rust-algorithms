@@ -125,7 +125,7 @@ mod lib {
             );
         }
 
-        (maximum - minimum).abs()
+        maximum - minimum
     }
 
     /// Find the greatest possible distance between consecutive items from array in O(n) time and O(1) space
