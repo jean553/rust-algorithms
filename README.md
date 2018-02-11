@@ -42,6 +42,8 @@ Returns the maximum value from an array, O(n) time and O(1) space.
 
 ### get_max_range(array)
 
+![Image 1](images/max_range.png)
+
 Returns the highest distance possible between two items of the array, O(n) time and O(1) space.
 
 ```rust
