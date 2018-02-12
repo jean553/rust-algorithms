@@ -1,5 +1,16 @@
 # rust-algorithms
 
+## Table of content
+ * [Get minimum value from array](#get-minimum-value-from-array) - O(n) time and O(1) space
+ * [Get maximum value from array](#get-maximum-value-from-array) - O(n) time and O(1) space
+ * [Get maximum range from array](#get-maximum-range-from-array) - O(n) time and O(1) space
+ * [Get highest movement from array](#get-highest-movement-from-array) - O(n) time and O(1) space
+ * [Get missing value from array](#get-missing-value-from-array) - O(n) time and O(1) space
+ * [Product of all numbers except current one](#product-of-all-numbers-except-current-one) - O(n) time and O(n) space
+ * [Get maximum product of three numbers from array](#get-maximum-product-of-three-numbers-from-array) - O(n) time and O(1) space
+ * [Merge ranges](#merge-ranges) - O(n log2 n) time and O(n) space
+ * [Get all combinations amount](#get-all-combinations-amount) - O(n * m) time (two different arrays are browsed) and O(n) space
+
 ## Create the container
 
 ```sh
@@ -32,17 +43,27 @@ cargo rustdoc -- --no-defaults
 
 ## Implemented methods
 
-### min_value(array)
+### Get minimum value from array
 
-Returns the minimum value from an array, O(n) time and O(1) space.
+O(n) time and O(1) space
 
-### max_value(array)
+```rust
+let array: [u8; 5] = [4, 3, 6, 2, 3];
+let minimum = min_value(&array); // 2
+```
 
-Returns the maximum value from an array, O(n) time and O(1) space.
+### Get maximum value from array
 
-### get_max_range(array)
+O(n) time and O(1) space
 
-Returns the highest distance possible between two items of the array, O(n) time and O(1) space.
+```rust
+let array: [u8; 5] = [4, 3, 6, 2, 3];
+let maximum = max_value(&array); // 6
+```
+
+### Get maximum range from array
+
+Returns the highest distance possible between two numbers of the array, O(n) time and O(1) space.
 
 ```rust
 let array: [u8; 7] = [0, 1, -2, 0, 3, 2, 5];
@@ -51,35 +72,52 @@ let max_distance = get_max_range(&array); // 7
 
 ![Image 1](images/max_range.png)
 
-### get_max_consecutive_range(array)
+### Get highest movement from array
 
-Returns the highest distance possible between consecutive items of the array, O(n) time and O(1) space.
+Returns the highest variation from an array, O(n) time and O(1) space.
+
+For example, taking the following array:
+
+```
+0 1 6 3 6 -1 0
+```
+
+The variations are:
+
+```
+0 to 6 -> 6
+6 to 3 -> 3
+3 to 6 -> 3
+6 to -1 -> 7
+-1 to 0 -> 1
+```
 
 ```rust
 let array: [u8; 7] = [0, 1, -2, 0, 3, 2, 5];
 let max_distance = get_max_consecutive_range(&array); // 5
 ```
 
-### get_missing_value(array)
+### Get missing value from array
 
-Returns the missing value from an array of consecutives value, O(n) time and O(1) space.
+Returns the missing value from an array of not ordered consecutive numbers, O(n) time and O(1) space.
 
 ```rust
 let array: [u32; 4] = [4, 2, 1, 5];
 let missing_value = get_missing_value(&array); // 3
 ```
 
-### product_all_items_except_current(array)
+### Product of all numbers except current one
 
-Returns the product of all the array items except the current item, O(n) time and O(n) space.
-An array of identical space is built. The original array is browsed twice.
+Takes an array with numbers. Replace every number by the product of all the numbers of the array except the one currently at this array position.
+
+The array is browsed two times so O(n) time, and a new array is created to store the result, so O(n) space.
 
 ```rust
 let array: [u32; 4] = [2, 5, 3, 4];
 let result = product_all_items_except_current(&array); // [60, 24, 40, 30]
 ```
 
-### get_max_product_of_three(array)
+### Get maximum product of three numbers from array
 
 Returns the maximum product of three numbers from an array, taking O(n) time and O(1) space.
 
@@ -88,11 +126,17 @@ let array: [i32; 5] = [-4, 3, -2, -5, 6];
 let max = get_max_product_of_three(&array); // -5 * -4 * 6 = 120
 ```
 
-### get_merge_ranges(array)
+### Merge ranges
 
-Merge array of ranges, taking O(n log n) time worst case (O(n) best case) and O(n) space.
-The array is sorted before processing, so it explains the time complexity.
-A resulting array is created from the first one, it explains the space complexity.
+Merge array of ranges. A range is merged into the previous one if possible.
+
+The array is first sorted. Using sort, the following time complexity occurs:
+ * O(n log2 n)
+ * O(n^2) if the array is totally reverted (worst case),
+ * O(n) if the array is already ordered (best case),
+so we considere the average case O(n log2 n) time complexity.
+
+The result is stored into a new array, so the space complexity is O(n).
 
 ```rust
 let ranges: [(i32, i32); 5] = [
@@ -106,12 +150,14 @@ let ranges: [(i32, i32); 5] = [
 let result = get_merge_ranges(&ranges); // [(-6, -3), (2, 7), (8, 10)]
 ```
 
-### get_sum_numbers_combinations_quantity_for_amount(allowed_numbers, amount)
+### Get all combinations amount
 
 Find the quantity of the all the possible combinations to make a sum
 using the "allowed numbers" that is equal to the expected "amount".
+
 The time complexity is O(n * m) as two arrays of different content
 are browsed (one with the possible numbers, one with the results).
+
 The space complexity is O(n) as we have to create a new array
 based on the given input.
 
