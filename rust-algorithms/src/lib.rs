@@ -597,6 +597,27 @@ mod lib {
             factorial(total_items_amount - selection_items_amount)
         )
     }
+
+    /// Returns the number at the given index into the fibonacci serie.
+    ///
+    /// # Args:
+    ///
+    /// `index` - the fibonacci index
+    ///
+    /// # Returns:
+    ///
+    /// the fibonacci number
+    pub fn fibonacci_recursive(index: u32) -> u32 {
+
+        if index == 0 || index == 1 {
+            return index;
+        }
+
+        return
+            fibonacci_recursive(index - 1) +
+            fibonacci_recursive(index - 2)
+        ;
+    }
 }
 
 #[cfg(test)]
@@ -614,3 +635,4 @@ mod tests_permutations_with_repetitions;
 mod tests_factorial;
 mod tests_permutations_without_repetition;
 mod tests_remove_from_linked_list;
+mod tests_fibonacci;
