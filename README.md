@@ -268,3 +268,11 @@ Returns the number at the given index into the Fibonacci serie using memoization
 ```rust
 let number = recursive_fibonacci_with_memoization(6); // 8 (0, 1, 1, 2, 3, 5, 8)
 ```
+
+### fibonacci_with_bottom_up(index)
+
+Returns the number at the given index into the Fibonacci serie using a bottom-up approach. The result is computed in O(n) time and O(1) space.
+
+```rust
+let number = fibonacci_with_bottom_up(10); // 55
+```

@@ -688,6 +688,39 @@ mod lib {
 
         computed_value
     }
+
+    /// Returns the number of the Fibonacci serie at the given index using a bottom-up approach, uses O(n) time and O(1) space.
+    ///
+    /// # Args:
+    ///
+    /// `index` - the index of the number to find
+    ///
+    /// # Returns:
+    ///
+    /// the number
+    pub fn fibonacci_with_bottom_up(index: usize) -> u32 {
+
+        if index == 0 {
+            return 0;
+        }
+
+        if index == 1 {
+            return 1;
+        }
+
+        let mut first = 0;
+        let mut second = 1;
+        let mut result = first + second;
+
+        for current_index in 1..index {
+
+            result = second + first;
+            first = second;
+            second = result;
+        }
+
+        result
+    }
 }
 
 #[cfg(test)]
