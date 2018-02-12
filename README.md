@@ -42,14 +42,14 @@ Returns the maximum value from an array, O(n) time and O(1) space.
 
 ### get_max_range(array)
 
-![Image 1](images/max_range.png)
-
 Returns the highest distance possible between two items of the array, O(n) time and O(1) space.
 
 ```rust
 let array: [u8; 7] = [0, 1, -2, 0, 3, 2, 5];
 let max_distance = get_max_range(&array); // 7
 ```
+
+![Image 1](images/max_range.png)
 
 ### get_max_consecutive_range(array)
 
