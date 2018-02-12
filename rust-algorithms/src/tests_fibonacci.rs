@@ -4,6 +4,7 @@ mod tests {
     use lib::{
         fibonacci_recursive,
         fibonacci_recursive_with_memoization,
+        fibonacci_with_bottom_up,
     };
 
     #[test]
@@ -21,6 +22,15 @@ mod tests {
         assert_eq!(
             fibonacci_recursive_with_memoization(6),
             8,
+        );
+    }
+
+    #[test]
+    fn test_fibonacci_with_bottom_up() {
+
+        assert_eq!(
+            fibonacci_with_bottom_up(10),
+            55,
         );
     }
 }
