@@ -10,7 +10,10 @@ mod lib {
 
     use std::default::Default;
 
-    use std::collections::HashSet;
+    use std::collections::{
+        HashSet,
+        HashMap,
+    };
 
     pub enum LinkedListNode {
         Next(
@@ -613,10 +616,77 @@ mod lib {
             return index;
         }
 
+        /* overlapping subproblems: no memoization,
+           the same fibonacci_recursive(n) method
+           can be called multiple times with the same input;
+           in that case, it will compute an output that
+           has already been computed */
         return
             fibonacci_recursive(index - 1) +
             fibonacci_recursive(index - 2)
         ;
+    }
+
+    /// Returns the number at the given index into the fibonacci serie using a recursive function and memoization.
+    ///
+    /// # Args:
+    ///
+    /// `index` - the fibonacci index
+    ///
+    /// # Returns:
+    ///
+    /// the fibonacci number
+    pub fn fibonacci_recursive_with_memoization(index: u32) -> u32 {
+
+        let mut already_computed: HashMap<u32, u32> = HashMap::new();
+
+        fibonacci_computation(
+            index,
+            &mut already_computed,
+        )
+    }
+
+    /// Private function for the fibonacci computation using memoization and a hash map to store all the values that have already been computed
+    ///
+    /// # Args:
+    ///
+    /// `index` - the fibonacci index
+    /// `already_computed` - hashmap that stores already computed values
+    ///
+    /// # Returns:
+    ///
+    /// fibonacci number at the given index
+    fn fibonacci_computation(
+        index: u32,
+        already_computed: &mut HashMap<u32, u32>,
+    ) -> u32 {
+
+        if index == 0 || index == 1 {
+            return index;
+        }
+
+        /* second memoization step: do not compute a value
+           that is already computed */
+        {
+            let already_computed_value = already_computed.get(&index);
+            if already_computed_value.is_some() {
+                return *already_computed_value.unwrap();
+            }
+        }
+
+        let computed_value =
+            fibonacci_recursive(index - 1) +
+            fibonacci_recursive(index - 2)
+        ;
+
+        /* first memoization step: inserts the index and its computed value
+           into a hashmap to prevent useless computations */
+        already_computed.insert(
+            index,
+            computed_value,
+        );
+
+        computed_value
     }
 }
 

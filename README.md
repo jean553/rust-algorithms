@@ -260,3 +260,11 @@ This solution has a **overlapping subproblem** issue and there is no **memoizati
 In the example above, the function `recursive_fibonacci(4)` is called multiple times and it will always return the same output.
 
 The time complexity is O(2^n) because of the multiple recursions and the two calls at the end of the function. Exponential cost is worst than quadratic complexity.
+
+### fibonacci_recursive_with_memoization(index)
+
+Returns the number at the given index into the Fibonacci serie using memoization in order to prevent the overlapping subproblem.
+
+```rust
+let number = recursive_fibonacci_with_memoization(6); // 8 (0, 1, 1, 2, 3, 5, 8)
+```
