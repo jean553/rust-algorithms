@@ -247,3 +247,16 @@ let permutations = get_all_permutations_without_repetition(items);
 ### at_linked_list(list, index)
 
 Returns the value at the given index from the given `LinkedListNode` item in O(n) time and O(1) space.
+
+### fibonacci_recursive(index)
+
+Returns the number at the given index into the Fibonacci serie.
+
+```rust
+let number = recursive_fibonacci(6); // 8 (0, 1, 1, 2, 3, 5, 8)
+```
+
+This solution has a **overlapping subproblem** issue and there is no **memoization** to handle it.
+In the example above, the function `recursive_fibonacci(4)` is called multiple times and it will always return the same output.
+
+The time complexity is O(2^n) because of the multiple recursions and the two calls at the end of the function. Exponential cost is worst than quadratic complexity.
