@@ -9,7 +9,11 @@
  * [Product of all numbers except current one](#product-of-all-numbers-except-current-one) - O(n) time and O(n) space
  * [Get maximum product of three numbers from array](#get-maximum-product-of-three-numbers-from-array) - O(n) time and O(1) space
  * [Merge ranges](#merge-ranges) - O(n log2 n) time and O(n) space
- * [Get all combinations amount](#get-all-combinations-amount) - O(n * m) time (two different arrays are browsed) and O(n) space
+ * [Get all sums amount](#get-all-sums-amount) - O(n * m) time (two different arrays are browsed) and O(n) space
+ * [Get all sums](#get-all-sums) - O(n * m * o) time and O(n * m) space
+ * [Get permutations with repetitions amount](#get-permutations-with-repetitions-amount) - O(1) time and O(1) space
+ * [Get all permutations with repetitions](#get-all-permutations-with-repetitions) - O(n^n) time and O(n) space
+ * [Factorial](#factorial) - O(n) time and O(1) space
 
 ## Create the container
 
@@ -150,10 +154,10 @@ let ranges: [(i32, i32); 5] = [
 let result = get_merge_ranges(&ranges); // [(-6, -3), (2, 7), (8, 10)]
 ```
 
-### Get all combinations amount
+### Get all sums amount
 
-Find the quantity of the all the possible combinations to make a sum
-using the "allowed numbers" that is equal to the expected "amount".
+Find the amount of possible sums to totalize the given amount
+using only the given numbers (multiple time usage is allowed).
 
 The time complexity is O(n * m) as two arrays of different content
 are browsed (one with the possible numbers, one with the results).
@@ -180,11 +184,13 @@ let sums_amount = get_sum_numbers_combinations_quantity_for_amount(
 */
 ```
 
-### get_sum_numbers_combinations_for_amount(allowed_numbers, amount)
+### Get all sums
 
-Find all the possible combinations of numbers (using the "allowed numbers" only)
-to make the sum for a given amount "amount".
-The time complexity is O(n * m * o) and the space complexity is O(n * m).
+Find the amount of sums to totalize the given amount
+using only the given numbers (multiple time usage is allowed).
+
+The time complexity is O(n * m * o) and the space complexity is O(n * m),
+as two other arrays might be browsed and one array is created per original array value.
 
 ```rust
 let allowed_numbers: [u8; 3] = [2, 4, 5];
@@ -205,10 +211,12 @@ let sums_amount = get_sum_numbers_combinations_for_amount(
 */
 ```
 
-### permutations_with_repetitions(total_amount, selection_amount)
+### Get permutations with repetitions amount
 
 Returns all the possible permutations amount (with repetitions)
 according to a total amount of items and an items amount to include into the selection.
+
+The time is O(1) and the space is O(1), only the amount is calculated using the formula.
 
 ```
 The amount of possible permutations (order matters) with repetitions for a total set of length n and a selection of length k is n^k.
@@ -218,14 +226,20 @@ The amount of possible permutations (order matters) with repetitions for a total
 let possible_permutations_amount = permutations_with_repetitions(10, 4); // 10000
 ```
 
-### get_all_permutations_with_repetitions(array, selection_amount)
+### Get all permutations with repetitions
 (handled by **get_all_permutations(array, selection, allow_repetition: true)**)
 
 Returns all the possible permutations (with repetitions) of the given items from the array.
 
+The time complexity is O(n^n) because we use a **depth-first search** algorithm
+(that means we browse the recursion tree as deep as possible for one path, before backing up
+and browsing another path).
+
+A container with a size related to the input is created, so the space complexity is O(n).
+
 ```rust
 let array: [u8; 2] = [1, 2];
-let permutations = get_all_permutations_with_repetitions(&array, 2);
+let permutations = get_all_permutations(&array, 2, true);
 
 /*
 [1, 1],
@@ -257,6 +271,11 @@ let permutations = get_all_permutations_with_repetitions(&array, 2);
 ### factorial(value)
 
 Recursive factorial calculation.
+
+O(n) time as the amount of recursion depends on the given input
+(recursion occur as long as the input is not 1, started from the default input).
+
+O(1) space as the result of the previous recursion is the input of the next one.
 
 ```rust
 let result = factorial(4); // 24
