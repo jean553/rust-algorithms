@@ -533,6 +533,8 @@ mod lib {
 
             if depth < length {
 
+                /* FIXME: this might be checked simply by putting
+                   all the items into a set (it would remove duplicates) */
                 if !repetitions_allowed {
 
                     if new_browsed.contains(value) {
