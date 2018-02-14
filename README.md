@@ -14,6 +14,12 @@
  * [Get permutations with repetitions amount](#get-permutations-with-repetitions-amount) - O(1) time and O(1) space
  * [Get all permutations with repetitions](#get-all-permutations-with-repetitions) - O(n^n) time and O(n) space
  * [Factorial](#factorial) - O(n) time and O(1) space
+ * [Get permutations without repetitions amount](#get-permutations-without-repetitions-amount) - O(1) time and O(1) space
+ * [Get all permutations without repetition](#get-all-permutations-without-repetition)
+ * [Get at linked list index](#get-at-linked-list-index) - O(n) time and O(1) space
+ * [Get number at the fibonacci serie index using recursion](#get-number-at-the-fibonacci-serie-index-using-recursion) - O(2^n) time and O(1) space
+ * [Get number at the fibonacci serie index using recursion and memoization](#get-number-at-the-fibonacci-serie-index-using-recursion-and-memoization) - O(n) time and O(1) space
+ * [Get number at the fibonacci serie index using bottom up](#get-number-at-the-fibonacci-serie-index-using-bottom-up) - O(n) time and O(1) space
 
 ## Create the container
 
@@ -281,10 +287,13 @@ O(1) space as the result of the previous recursion is the input of the next one.
 let result = factorial(4); // 24
 ```
 
-### permutations_without_repetitions(total_amount, selection_amount)
+### Get permutations without repetitions amount
 
 Returns all the possible permutations amount without allowing repetitions,
 according to a total amount of items and an items amount to include into the selection.
+
+There is only one computation for the calculation, so the time complexity is O(1)
+and the space complexity is O(1).
 
 ```
 The amount of possible permutations (order matters) without repetitions for a total set of length n and a selection of length k is n!/(n-k)!.
@@ -294,10 +303,16 @@ The amount of possible permutations (order matters) without repetitions for a to
 let possible_permutations_amount = permutations_without_repetition(5, 2); // 60
 ```
 
-### get_all_permutations_without_repetition(array)
+### Get all permutations without repetition
 (handled by **get_all_permutations(array, selection, allow_repetition: false)**)
 
 Returns all the possible permutations without allowing repetitions.
+
+The time complexity is O(n^n) because we use a **depth-first search** algorithm
+(that means we browse the recursion tree as deep as possible for one path, before backing up
+and browsing another path).
+
+A container with a size related to the input is created, so the space complexity is O(n).
 
 ```rust
 let items: [u8; 2] = [1, 2];
@@ -309,11 +324,11 @@ let permutations = get_all_permutations_without_repetition(items);
 */
 ```
 
-### at_linked_list(list, index)
+### Get at linked list index
 
 Returns the value at the given index from the given `LinkedListNode` item in O(n) time and O(1) space.
 
-### fibonacci_recursive(index)
+### Get the number at the fibonacci serie index using recursion
 
 Returns the number at the given index into the Fibonacci serie.
 
@@ -326,7 +341,7 @@ In the example above, the function `recursive_fibonacci(4)` is called multiple t
 
 The time complexity is O(2^n) because of the multiple recursions and the two calls at the end of the function. Exponential cost is worst than quadratic complexity.
 
-### fibonacci_recursive_with_memoization(index)
+### Get number at the fibonacci serie index using recursion and memoization
 
 Returns the number at the given index into the Fibonacci serie using memoization in order to prevent the overlapping subproblem.
 
@@ -334,7 +349,7 @@ Returns the number at the given index into the Fibonacci serie using memoization
 let number = recursive_fibonacci_with_memoization(6); // 8 (0, 1, 1, 2, 3, 5, 8)
 ```
 
-### fibonacci_with_bottom_up(index)
+### Get number at the fibonacci serie index using bottom up
 
 Returns the number at the given index into the Fibonacci serie using a bottom-up approach. The result is computed in O(n) time and O(1) space.
 
